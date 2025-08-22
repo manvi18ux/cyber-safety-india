@@ -82,4 +82,19 @@
   .glass {
     @apply bg-white/70 backdrop-blur-md border border-gray-200/60 shadow-soft;
   }
+
+  /* Mobile-specific improvements */
+  @media (max-width: 640px) {
+    .card {
+      @apply p-4;
+    }
+    
+    .btn-primary, .btn-secondary, .btn-danger {
+      @apply py-2.5 px-4 text-sm;
+    }
+    
+    .input-field {
+      @apply py-2.5 px-3 text-sm;
+    }
+  }
 }

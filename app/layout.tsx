@@ -29,16 +29,12 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body className={inter.className}>
-        <div className="min-h-screen">
-          <div className="absolute inset-0 -z-10 bg-gradient-to-br from-blue-50 via-white to-purple-50" />
-          <div className="container-padded py-6">
-            <div className="glass rounded-2xl p-4 md:p-6">
-              {children}
-            </div>
-          </div>
-        </div>
-      </body>
+             <body className={inter.className}>
+         <div className="min-h-screen">
+           <div className="absolute inset-0 -z-10 bg-gradient-to-br from-blue-50 via-white to-purple-50" />
+           {children}
+         </div>
+       </body>
     </html>
   )
 }

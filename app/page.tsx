@@ -67,15 +67,15 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
-      {/* Navigation */}
-      <nav className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-3">
-              <Shield className="h-8 w-8 text-primary-600" />
-              <span className="text-xl font-bold text-gray-900">Cyber Safety India</span>
-            </div>
-                         <div className="flex items-center space-x-4">
+             {/* Navigation */}
+       <nav className="bg-white shadow-sm border-b">
+         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+           <div className="flex justify-between items-center h-16">
+             <div className="flex items-center space-x-3">
+               <Shield className="h-6 w-6 sm:h-8 sm:w-8 text-primary-600" />
+               <span className="text-lg sm:text-xl font-bold text-gray-900">Cyber Safety India</span>
+             </div>
+             <div className="hidden sm:flex items-center space-x-4">
                <Link href="/learn" className="text-gray-600 hover:text-primary-600 transition-colors">
                  Learn
                </Link>
@@ -92,23 +92,31 @@ export default function HomePage() {
                  About
                </Link>
              </div>
-          </div>
-        </div>
-      </nav>
+             {/* Mobile menu button */}
+             <div className="sm:hidden">
+               <button className="text-gray-600 hover:text-primary-600">
+                 <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                 </svg>
+               </button>
+             </div>
+           </div>
+         </div>
+       </nav>
 
-      {/* Hero Section */}
-      <section className="relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-          <div className="text-center">
-            <motion.h1 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-4xl md:text-6xl font-bold text-gray-900 mb-6"
-            >
-              Stay Safe in the
-              <span className="text-gradient"> Digital World</span>
-            </motion.h1>
+             {/* Hero Section */}
+       <section className="relative overflow-hidden">
+         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
+           <div className="text-center">
+             <motion.h1 
+               initial={{ opacity: 0, y: 20 }}
+               animate={{ opacity: 1, y: 0 }}
+               transition={{ duration: 0.8 }}
+               className="text-3xl sm:text-4xl md:text-6xl font-bold text-gray-900 mb-4 sm:mb-6"
+             >
+               Stay Safe in the
+               <span className="text-gradient"> Digital World</span>
+             </motion.h1>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -191,7 +199,7 @@ export default function HomePage() {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
             {demographics.map((demo, index) => {
               const Icon = demo.icon;
               return (
