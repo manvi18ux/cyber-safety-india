@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { 
   Shield, 
@@ -64,6 +64,20 @@ const demographics = [
 
 export default function HomePage() {
   const [selectedDemographic, setSelectedDemographic] = useState<Demographic | null>(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Element;
+      if (isMobileMenuOpen && !target.closest('nav')) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [isMobileMenuOpen]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
@@ -94,17 +108,63 @@ export default function HomePage() {
              </div>
              {/* Mobile menu button */}
              <div className="sm:hidden">
-               <button className="text-gray-600 hover:text-primary-600">
+               <button 
+                 className="text-gray-600 hover:text-primary-600"
+                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+               >
                  <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                  </svg>
                </button>
              </div>
            </div>
-         </div>
+                  </div>
        </nav>
 
-             {/* Hero Section */}
+       {/* Mobile Menu */}
+       {isMobileMenuOpen && (
+         <div className="sm:hidden bg-white border-b border-gray-200 shadow-lg">
+           <div className="px-4 py-2 space-y-1">
+             <Link 
+               href="/learn" 
+               className="block px-3 py-2 text-gray-600 hover:text-primary-600 hover:bg-gray-50 rounded-md transition-colors"
+               onClick={() => setIsMobileMenuOpen(false)}
+             >
+               Learn
+             </Link>
+             <Link 
+               href="/threats" 
+               className="block px-3 py-2 text-gray-600 hover:text-primary-600 hover:bg-gray-50 rounded-md transition-colors"
+               onClick={() => setIsMobileMenuOpen(false)}
+             >
+               Threats
+             </Link>
+             <Link 
+               href="/checklist" 
+               className="block px-3 py-2 text-gray-600 hover:text-primary-600 hover:bg-gray-50 rounded-md transition-colors"
+               onClick={() => setIsMobileMenuOpen(false)}
+             >
+               Checklist
+             </Link>
+             <Link 
+               href="/emergency" 
+               className="block px-3 py-2 text-gray-600 hover:text-primary-600 hover:bg-gray-50 rounded-md transition-colors"
+               onClick={() => setIsMobileMenuOpen(false)}
+             >
+               Emergency
+             </Link>
+             <Link 
+               href="/about" 
+               className="block px-3 py-2 text-gray-600 hover:text-primary-600 hover:bg-gray-50 rounded-md transition-colors"
+               onClick={() => setIsMobileMenuOpen(false)}
+             >
+               About
+             </Link>
+           </div>
+         </div>
+       )}
+
+       {/* Hero Section */}
        <section className="relative overflow-hidden">
          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
            <div className="text-center">
