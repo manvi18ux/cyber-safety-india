@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 
@@ -9,8 +9,12 @@ export const metadata: Metadata = {
   description: 'Comprehensive cyber safety platform for Indian users. Learn about phishing, UPI scams, identity theft, and more. Stay protected online.',
   keywords: 'cyber safety, digital security, fraud prevention, India, phishing, UPI scams, online safety',
   authors: [{ name: 'Cyber Safety India Team' }],
-  viewport: 'width=device-width, initial-scale=1',
   robots: 'index, follow',
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
 }
 
 export default function RootLayout({

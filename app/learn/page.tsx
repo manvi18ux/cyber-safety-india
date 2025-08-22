@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { 
   BookOpen, 
@@ -19,7 +19,7 @@ import { useSearchParams } from 'next/navigation';
 import { LearningModule, Demographic } from '@/types';
 import { learningModules, getModulesByDemographic } from '@/data/learning-modules';
 
-export default function LearnPage() {
+function LearnPageContent() {
   const searchParams = useSearchParams();
   const [selectedDemographic, setSelectedDemographic] = useState<Demographic | null>(
     (searchParams.get('demographic') as Demographic) || null
@@ -388,5 +388,18 @@ export default function LearnPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function LearnPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="text-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto mb-4"></div>
+        <p className="text-gray-600">Loading learning modules...</p>
+      </div>
+    </div>}>
+      <LearnPageContent />
+    </Suspense>
   );
 }
