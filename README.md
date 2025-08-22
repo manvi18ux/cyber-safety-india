@@ -17,6 +17,14 @@ A comprehensive cyber safety platform designed specifically for Indian users to 
 - **Threats Database** (`/threats`) - Comprehensive threat information
 - **Safety Checklists** (`/checklist`) - Interactive safety assessments
 - **Emergency Contacts** (`/emergency`) - Quick access to help
+- **Dashboard** (`/dashboard`) - Personalized user dashboard (requires authentication)
+
+### Authentication System
+- **Secure User Authentication** - Email/password login with NextAuth.js
+- **User Registration** - Complete sign-up process with validation
+- **Protected Routes** - Middleware-based route protection
+- **Session Management** - JWT-based secure sessions
+- **Demo Account** - Test with demo@example.com / password123
 
 ## 🚀 Getting Started
 
@@ -37,12 +45,19 @@ A comprehensive cyber safety platform designed specifically for Indian users to 
    npm install
    ```
 
-3. **Run the development server**
+3. **Set up environment variables**
+   ```bash
+   # Create .env.local file
+   NEXTAUTH_URL=http://localhost:3000
+   NEXTAUTH_SECRET=your-super-secret-key-here-change-this-in-production
+   ```
+
+4. **Run the development server**
    ```bash
    npm run dev
    ```
 
-4. **Open your browser**
+5. **Open your browser**
    Navigate to [http://localhost:3000](http://localhost:3000)
 
 ### Build for Production

@@ -89,23 +89,26 @@ export default function HomePage() {
                <Shield className="h-6 w-6 sm:h-8 sm:w-8 text-primary-600" />
                <span className="text-lg sm:text-xl font-bold text-gray-900">Cyber Safety India</span>
              </div>
-             <div className="hidden sm:flex items-center space-x-4">
-               <Link href="/learn" className="text-gray-600 hover:text-primary-600 transition-colors">
-                 Learn
-               </Link>
-               <Link href="/threats" className="text-gray-600 hover:text-primary-600 transition-colors">
-                 Threats
-               </Link>
-               <Link href="/checklist" className="text-gray-600 hover:text-primary-600 transition-colors">
-                 Checklist
-               </Link>
-               <Link href="/emergency" className="text-gray-600 hover:text-primary-600 transition-colors">
-                 Emergency
-               </Link>
-               <Link href="/about" className="text-gray-600 hover:text-primary-600 transition-colors">
-                 About
-               </Link>
-             </div>
+                           <div className="hidden sm:flex items-center space-x-4">
+                <Link href="/learn" className="text-gray-600 hover:text-primary-600 transition-colors">
+                  Learn
+                </Link>
+                <Link href="/threats" className="text-gray-600 hover:text-primary-600 transition-colors">
+                  Threats
+                </Link>
+                <Link href="/checklist" className="text-gray-600 hover:text-primary-600 transition-colors">
+                  Checklist
+                </Link>
+                <Link href="/emergency" className="text-gray-600 hover:text-primary-600 transition-colors">
+                  Emergency
+                </Link>
+                <Link href="/about" className="text-gray-600 hover:text-primary-600 transition-colors">
+                  About
+                </Link>
+                <Link href="/auth/signin" className="btn-primary px-4 py-2 text-sm">
+                  Sign In
+                </Link>
+              </div>
              {/* Mobile menu button */}
              <div className="sm:hidden">
                <button 
@@ -159,6 +162,13 @@ export default function HomePage() {
                onClick={() => setIsMobileMenuOpen(false)}
              >
                About
+             </Link>
+             <Link 
+               href="/auth/signin" 
+               className="block px-3 py-2 bg-primary-600 text-white hover:bg-primary-700 rounded-md transition-colors"
+               onClick={() => setIsMobileMenuOpen(false)}
+             >
+               Sign In
              </Link>
            </div>
          </div>

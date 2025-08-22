@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import AuthProvider from './providers/AuthProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -30,10 +31,12 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
              <body className={inter.className}>
-         <div className="min-h-screen">
-           <div className="absolute inset-0 -z-10 bg-gradient-to-br from-blue-50 via-white to-purple-50" />
-           {children}
-         </div>
+         <AuthProvider>
+           <div className="min-h-screen">
+             <div className="absolute inset-0 -z-10 bg-gradient-to-br from-blue-50 via-white to-purple-50" />
+             {children}
+           </div>
+         </AuthProvider>
        </body>
     </html>
   )
