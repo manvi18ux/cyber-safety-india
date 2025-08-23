@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { signIn, getSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -14,6 +14,15 @@ export default function SignInPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const router = useRouter();
+
+  useEffect(() => {
+    // Check if user is already signed in
+    getSession().then((session) => {
+      if (session) {
+        router.push('/dashboard');
+      }
+    });
+  }, [router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,11 +38,8 @@ export default function SignInPage() {
 
       if (result?.error) {
         setError('Invalid email or password');
-      } else {
-        const session = await getSession();
-        if (session) {
-          router.push('/dashboard');
-        }
+      } else if (result?.ok) {
+        router.push('/dashboard');
       }
     } catch (error) {
       setError('An error occurred. Please try again.');
@@ -183,6 +189,6 @@ export default function SignInPage() {
           </div>
         </motion.div>
       </div>
-    </div>
-  );
+ </div>
+);
 }
