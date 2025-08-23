@@ -6,23 +6,12 @@ import Link from 'next/link';
 import { Shield, Eye, EyeOff, AlertCircle, CheckCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-interface FormData {
-  name: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-  demographic: string;
-  location: string;
-}
-
 export default function SignUpPage() {
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
     confirmPassword: '',
-    demographic: '',
-    location: ''
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -31,7 +20,7 @@ export default function SignUpPage() {
   const [success, setSuccess] = useState(false);
   const router = useRouter();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -39,8 +28,8 @@ export default function SignUpPage() {
   };
 
   const validateForm = () => {
-    if (!formData.name || !formData.email || !formData.password || !formData.confirmPassword || !formData.demographic) {
-      setError('All required fields must be filled');
+    if (!formData.name || !formData.email || !formData.password || !formData.confirmPassword) {
+      setError('All fields are required');
       return false;
     }
 
@@ -74,29 +63,14 @@ export default function SignUpPage() {
     setIsLoading(true);
 
     try {
-      const response = await fetch('/api/users', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          password: formData.password,
-          demographic: formData.demographic,
-          location: formData.location
-        }),
-      });
-
-      if (response.ok) {
-        setSuccess(true);
-        setTimeout(() => {
-          router.push('/auth/signin?message=Account created successfully');
-        }, 2000);
-      } else {
-        const data = await response.json();
-        setError(data.error || 'Registration failed. Please try again.');
-      }
+      // In a real application, you would send this data to your API
+      // For now, we'll simulate a successful registration
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      setSuccess(true);
+      setTimeout(() => {
+        router.push('/auth/signin');
+      }, 2000);
     } catch (error) {
       setError('Registration failed. Please try again.');
     } finally {
@@ -166,7 +140,7 @@ export default function SignUpPage() {
 
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-                Full Name *
+                Full Name
               </label>
               <input
                 id="name"
@@ -183,7 +157,7 @@ export default function SignUpPage() {
 
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                Email address *
+                Email address
               </label>
               <input
                 id="email"
@@ -199,44 +173,8 @@ export default function SignUpPage() {
             </div>
 
             <div>
-              <label htmlFor="demographic" className="block text-sm font-medium text-gray-700">
-                I am a *
-              </label>
-              <select
-                id="demographic"
-                name="demographic"
-                required
-                value={formData.demographic}
-                onChange={handleChange}
-                className="input-field mt-1"
-              >
-                <option value="">Select your category</option>
-                <option value="students">Student</option>
-                <option value="professionals">Professional</option>
-                <option value="homemakers">Homemaker</option>
-                <option value="rural-users">Rural User</option>
-                <option value="senior-citizens">Senior Citizen</option>
-              </select>
-            </div>
-
-            <div>
-              <label htmlFor="location" className="block text-sm font-medium text-gray-700">
-                Location
-              </label>
-              <input
-                id="location"
-                name="location"
-                type="text"
-                value={formData.location}
-                onChange={handleChange}
-                className="input-field mt-1"
-                placeholder="e.g., Mumbai, Maharashtra"
-              />
-            </div>
-
-            <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                Password *
+                Password
               </label>
               <div className="relative mt-1">
                 <input
@@ -269,7 +207,7 @@ export default function SignUpPage() {
 
             <div>
               <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
-                Confirm Password *
+                Confirm Password
               </label>
               <div className="relative mt-1">
                 <input
@@ -278,7 +216,7 @@ export default function SignUpPage() {
                   type={showConfirmPassword ? 'text' : 'password'}
                   autoComplete="new-password"
                   required
-                  value={formData.password}
+                  value={formData.confirmPassword}
                   onChange={handleChange}
                   className="input-field pr-10"
                   placeholder="Confirm your password"
@@ -342,6 +280,6 @@ export default function SignUpPage() {
           </form>
         </motion.div>
       </div>
- </div>
-);
+    </div>
+  );
 }

@@ -1,21 +1,66 @@
+import NextAuth from "next-auth";
+
+declare module "next-auth" {
+  interface User {
+    id: string;
+    email: string;
+    name: string;
+    role: string;
+    demographic: string;
+    location: string;
+  }
+
+  interface Session {
+    user: {
+      id: string;
+      email: string;
+      name: string;
+      role: string;
+      demographic: string;
+      location: string;
+    };
+  }
+}
+
+declare module "next-auth/jwt" {
+  interface JWT {
+    role: string;
+    demographic: string;
+    location: string;
+  }
+}
+
 export type Demographic = 
-  | 'students'
-  | 'professionals'
-  | 'homemakers'
-  | 'rural-users'
+  | 'students' 
+  | 'professionals' 
+  | 'homemakers' 
+  | 'rural-users' 
   | 'senior-citizens';
 
-export type ThreatCategory = 
-  | 'phishing'
-  | 'upi-scams'
-  | 'identity-theft'
-  | 'social-engineering'
-  | 'malware'
-  | 'fake-calls'
-  | 'online-shopping'
-  | 'social-media';
-
 export type RiskLevel = 'low' | 'medium' | 'high' | 'critical';
+
+export type ThreatCategory = 
+  | 'phishing' 
+  | 'social-engineering' 
+  | 'malware' 
+  | 'data-breach' 
+  | 'upi-scams' 
+  | 'fake-calls' 
+  | 'social-media' 
+  | 'online-shopping' 
+  | 'gaming' 
+  | 'education';
+
+export interface User {
+  id: string;
+  email: string;
+  name: string;
+  role: string;
+  demographic: Demographic;
+  location: string;
+  preferences: Record<string, any>;
+  progress: Record<string, any>;
+}
 
 export interface Threat {
   id: string;
@@ -24,99 +69,43 @@ export interface Threat {
   category: ThreatCategory;
   riskLevel: RiskLevel;
   demographics: Demographic[];
+  tips: string[];
   examples: string[];
-  preventionTips: string[];
-  whatToDo: string[];
-  realLifeCases: CaseStudy[];
-}
-
-export interface CaseStudy {
-  id: string;
-  title: string;
-  description: string;
-  outcome: string;
-  lessons: string[];
-  demographic: Demographic;
-  location: string;
-  date: string;
 }
 
 export interface LearningModule {
   id: string;
   title: string;
   description: string;
-  duration: number; // in minutes
-  difficulty: 'beginner' | 'intermediate' | 'advanced';
+  content: string[];
   demographics: Demographic[];
-  topics: string[];
-  quiz: QuizQuestion[];
-}
-
-export interface QuizQuestion {
-  id: string;
-  question: string;
-  options: string[];
-  correctAnswer: number;
-  explanation: string;
-}
-
-export interface User {
-  id: string;
-  name: string;
-  email: string;
-  demographic: Demographic;
-  location: string;
-  preferences: UserPreferences;
-  progress: UserProgress;
-}
-
-export interface UserPreferences {
-  language: 'english' | 'hindi' | 'tamil' | 'telugu' | 'bengali' | 'marathi';
-  notifications: boolean;
-  accessibility: {
-    fontSize: 'small' | 'medium' | 'large';
-    highContrast: boolean;
-    screenReader: boolean;
+  difficulty: 'beginner' | 'intermediate' | 'advanced';
+  duration: number; // in minutes
+  quiz: {
+    questions: Array<{
+      question: string;
+      options: string[];
+      correctAnswer: number;
+      explanation: string;
+    }>;
   };
 }
 
-export interface UserProgress {
-  completedModules: string[];
-  quizScores: Record<string, number>;
-  badges: string[];
-  streak: number;
-  totalTimeSpent: number;
-}
-
-export interface SafetyChecklist {
-  id: string;
-  title: string;
-  items: ChecklistItem[];
-  demographic: Demographic;
-  category: ThreatCategory;
-}
-
-export interface ChecklistItem {
-  id: string;
-  text: string;
-  isCompleted: boolean;
-  priority: 'low' | 'medium' | 'high';
-}
-
-export interface EmergencyContact {
-  name: string;
-  number: string;
-  type: 'police' | 'cyber-crime' | 'bank' | 'family';
-  description: string;
-}
-
-export interface NewsArticle {
+export interface ThreatIntelligence {
   id: string;
   title: string;
   summary: string;
-  content: string;
-  source: string;
+  description: string;
+  category: ThreatCategory;
+  riskLevel: RiskLevel;
+  location: string;
   date: string;
-  tags: string[];
-  threatLevel: RiskLevel;
+  source: string;
+  affectedUsers: string[];
+  immediateActions: string[];
+  longTermPrevention: string[];
+  relatedThreats: string[];
+  verified: boolean;
+  impact: 'low' | 'medium' | 'high' | 'critical';
+  tags:string[];
 }
