@@ -30,6 +30,9 @@ declare module "next-auth/jwt" {
   }
 }
 
+// --------------------
+// Base Types
+// --------------------
 export type Demographic = 
   | 'students' 
   | 'professionals' 
@@ -51,6 +54,9 @@ export type ThreatCategory =
   | 'gaming' 
   | 'education';
 
+// --------------------
+// User Types
+// --------------------
 export interface User {
   id: string;
   email: string;
@@ -62,6 +68,9 @@ export interface User {
   progress: Record<string, any>;
 }
 
+// --------------------
+// Threat Intelligence & Learning
+// --------------------
 export interface Threat {
   id: string;
   title: string;
@@ -107,5 +116,17 @@ export interface ThreatIntelligence {
   relatedThreats: string[];
   verified: boolean;
   impact: 'low' | 'medium' | 'high' | 'critical';
-  tags:string[];
+  tags: string[];
+}
+
+// --------------------
+// Safety Checklist
+// --------------------
+export interface SafetyChecklist {
+  id: string;
+  title: string;
+  description?: string;
+  demographic: Demographic;
+  category: ThreatCategory;
+  items: string[]; // checklist items
 }
