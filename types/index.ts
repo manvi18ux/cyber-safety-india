@@ -33,29 +33,30 @@ declare module "next-auth/jwt" {
 // --------------------
 // Base Types
 // --------------------
-export type Demographic = 
-  | 'students' 
-  | 'professionals' 
-  | 'homemakers' 
-  | 'rural-users' 
-  | 'senior-citizens';
+export type Demographic =
+  | "students"
+  | "professionals"
+  | "homemakers"
+  | "rural-users"
+  | "senior-citizens";
 
-export type RiskLevel = 'low' | 'medium' | 'high' | 'critical';
+export type RiskLevel = "low" | "medium" | "high" | "critical";
 
-export type ThreatCategory = 
-  | 'phishing' 
-  | 'social-engineering' 
-  | 'malware' 
-  | 'data-breach' 
-  | 'upi-scams' 
-  | 'fake-calls' 
-  | 'social-media' 
-  | 'online-shopping' 
-  | 'gaming' 
-  | 'education';
+export type ThreatCategory =
+  | "phishing"
+  | "social-engineering"
+  | "malware"
+  | "data-breach"
+  | "upi-scams"
+  | "fake-calls"
+  | "social-media"
+  | "online-shopping"
+  | "gaming"
+  | "education"
+  | "identity-theft";
 
 // --------------------
-// User Types
+// User
 // --------------------
 export interface User {
   id: string;
@@ -69,8 +70,19 @@ export interface User {
 }
 
 // --------------------
-// Threat Intelligence & Learning
+// Threats & Learning
 // --------------------
+export interface CaseStudy {
+  id: string;
+  title: string;
+  description: string;
+  outcome: string;
+  lessons: string[];
+  demographic: Demographic;
+  location: string;
+  date: string;
+}
+
 export interface Threat {
   id: string;
   title: string;
@@ -78,27 +90,31 @@ export interface Threat {
   category: ThreatCategory;
   riskLevel: RiskLevel;
   demographics: Demographic[];
-  tips: string[];
+  tips?: string[];
+  preventionTips: string[];
+  whatToDo?: string[];
   examples: string[];
+  realLifeCases: CaseStudy[];
 }
 
 export interface LearningModule {
   id: string;
   title: string;
   description: string;
+  topics: string[];
   content: string[];
   demographics: Demographic[];
-  difficulty: 'beginner' | 'intermediate' | 'advanced';
-  duration: number; // in minutes
-  quiz: {
-    questions: Array<{
-      question: string;
-      options: string[];
-      correctAnswer: number;
-      explanation: string;
-    }>;
-  };
+  difficulty: "beginner" | "intermediate" | "advanced";
+  duration: number;
+  quiz: Array<{
+    id: string;
+    question: string;
+    options: string[];
+    correctAnswer: number;
+    explanation: string;
+  }>;
 }
+
 
 export interface ThreatIntelligence {
   id: string;
@@ -115,7 +131,7 @@ export interface ThreatIntelligence {
   longTermPrevention: string[];
   relatedThreats: string[];
   verified: boolean;
-  impact: 'low' | 'medium' | 'high' | 'critical';
+  impact: "low" | "medium" | "high" | "critical";
   tags: string[];
 }
 
@@ -125,8 +141,33 @@ export interface ThreatIntelligence {
 export interface SafetyChecklist {
   id: string;
   title: string;
-  description?: string;
   demographic: Demographic;
   category: ThreatCategory;
-  items: string[]; // checklist items
+  items: Array<{
+    id: string;
+    text: string;
+    isCompleted: boolean;
+    priority: "low" | "medium" | "high";
+    description?: string;
+  }>;
+}
+
+// --------------------
+// Emergency Contact
+// --------------------
+export interface EmergencyContact {
+  id: string;
+  type:
+    | "police"
+    | "fire"
+    | "hospital"
+    | "cyber-cell"
+    | "women-helpline"
+    | "child-helpline"
+    | "senior-citizen"
+    | string;
+  name: string;
+  phone: string;
+  description?: string;
+  location?: string;
 }

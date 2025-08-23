@@ -1,14 +1,21 @@
-import { LearningModule, QuizQuestion } from '@/types';
+import { LearningModule } from '@/types';
 
 export const learningModules: LearningModule[] = [
   {
     id: 'basic-cyber-safety',
     title: 'Basic Cyber Safety for Everyone',
     description: 'Learn the fundamentals of staying safe online, including password security, safe browsing, and recognizing common threats.',
-    duration: 15,
-    difficulty: 'beginner',
-    demographics: ['students', 'professionals', 'homemakers', 'rural-users', 'senior-citizens'],
     topics: ['Password Security', 'Safe Browsing', 'Email Safety', 'Social Media Privacy'],
+    content: [
+      'Introduction to cyber safety',
+      'Creating strong passwords and password management',
+      'Safe browsing habits and avoiding malicious websites',
+      'Recognizing phishing emails and scams',
+      'Maintaining social media privacy'
+    ],
+    demographics: ['students', 'professionals', 'homemakers', 'rural-users', 'senior-citizens'],
+    difficulty: 'beginner',
+    duration: 15,
     quiz: [
       {
         id: 'q1',
@@ -40,10 +47,17 @@ export const learningModules: LearningModule[] = [
     id: 'upi-safety',
     title: 'UPI Safety Masterclass',
     description: 'Master UPI security to protect your digital payments from fraud and scams.',
-    duration: 20,
-    difficulty: 'intermediate',
-    demographics: ['students', 'professionals', 'homemakers', 'rural-users', 'senior-citizens'],
     topics: ['UPI PIN Security', 'QR Code Safety', 'Transaction Verification', 'Fraud Prevention'],
+    content: [
+      'Understanding UPI and digital payments',
+      'Creating and protecting your UPI PIN',
+      'Safe scanning of QR codes and verifying transactions',
+      'Recognizing UPI frauds and scams',
+      'Steps to report suspicious transactions'
+    ],
+    demographics: ['students', 'professionals', 'homemakers', 'rural-users', 'senior-citizens'],
+    difficulty: 'intermediate',
+    duration: 20,
     quiz: [
       {
         id: 'q1',
@@ -75,10 +89,17 @@ export const learningModules: LearningModule[] = [
     id: 'senior-citizen-safety',
     title: 'Cyber Safety for Senior Citizens',
     description: 'Specialized guidance for senior citizens to navigate the digital world safely.',
-    duration: 25,
-    difficulty: 'beginner',
-    demographics: ['senior-citizens'],
     topics: ['Phone Call Safety', 'Banking Security', 'Family Communication', 'Emergency Contacts'],
+    content: [
+      'Identifying suspicious phone calls',
+      'Safe banking practices',
+      'Communicating safely with family online',
+      'Maintaining emergency contact information',
+      'Avoiding scams targeting senior citizens'
+    ],
+    demographics: ['senior-citizens'],
+    difficulty: 'beginner',
+    duration: 25,
     quiz: [
       {
         id: 'q1',
@@ -110,10 +131,17 @@ export const learningModules: LearningModule[] = [
     id: 'student-online-safety',
     title: 'Online Safety for Students',
     description: 'Essential cyber safety knowledge for students using the internet for education and social media.',
-    duration: 18,
-    difficulty: 'beginner',
-    demographics: ['students'],
     topics: ['Social Media Safety', 'Online Gaming', 'Academic Integrity', 'Peer Pressure'],
+    content: [
+      'Safe use of social media platforms',
+      'Handling online gaming interactions',
+      'Maintaining academic integrity online',
+      'Dealing with peer pressure in digital spaces',
+      'Reporting cyberbullying and harassment'
+    ],
+    demographics: ['students'],
+    difficulty: 'beginner',
+    duration: 18,
     quiz: [
       {
         id: 'q1',
@@ -145,10 +173,17 @@ export const learningModules: LearningModule[] = [
     id: 'professional-security',
     title: 'Professional Cyber Security',
     description: 'Advanced security practices for professionals handling sensitive work data.',
-    duration: 30,
-    difficulty: 'advanced',
-    demographics: ['professionals'],
     topics: ['Work Email Security', 'Data Protection', 'VPN Usage', 'Incident Response'],
+    content: [
+      'Secure handling of work emails',
+      'Data protection policies and compliance',
+      'Using VPNs for secure connections',
+      'Incident response procedures',
+      'Reporting suspicious activities at work'
+    ],
+    demographics: ['professionals'],
+    difficulty: 'advanced',
+    duration: 30,
     quiz: [
       {
         id: 'q1',
@@ -180,10 +215,17 @@ export const learningModules: LearningModule[] = [
     id: 'rural-digital-literacy',
     title: 'Digital Literacy for Rural Users',
     description: 'Basic digital skills and safety for users in rural areas new to online services.',
-    duration: 22,
-    difficulty: 'beginner',
-    demographics: ['rural-users'],
     topics: ['Mobile Banking', 'Government Services', 'Digital Payments', 'Local Support'],
+    content: [
+      'Introduction to digital services',
+      'Using mobile banking safely',
+      'Accessing government services online',
+      'Digital payments and security',
+      'Finding reliable local support'
+    ],
+    demographics: ['rural-users'],
+    difficulty: 'beginner',
+    duration: 22,
     quiz: [
       {
         id: 'q1',
@@ -212,15 +254,3 @@ export const learningModules: LearningModule[] = [
     ]
   }
 ];
-
-export const getModulesByDemographic = (demographic: string): LearningModule[] => {
-  return learningModules.filter(module => module.demographics.includes(demographic as any));
-};
-
-export const getModuleById = (id: string): LearningModule | undefined => {
-  return learningModules.find(module => module.id === id);
-};
-
-export const getModulesByDifficulty = (difficulty: string): LearningModule[] => {
-  return learningModules.filter(module => module.difficulty === difficulty);
-};
